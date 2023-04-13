@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+          name="viewport">
+    <meta content="ie=edge" http-equiv="X-UA-Compatible">
+    <title>Photos</title>
+    <th:block th:replace="fragments/resources :: head"></th:block>
+</head>
+<body>
+<th:block th:replace="fragments/navbar :: navbar"></th:block>
+<th:block th:replace="fragments/sidenav :: sidenav"></th:block>
+<h1 class="m-3" th:text="${photo.title}"></h1>
+<div class="container">
+    <div class="row justify-content-center mb-3">
+        <div class="col-6">
+            <img class="w-100 img-fluid" th:src="${photo.url}">
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-6">
+            <p th:text="${photo.description}"></pth:text>
+        </div>
+    </div>
+</div>
+</body>
+</html>
