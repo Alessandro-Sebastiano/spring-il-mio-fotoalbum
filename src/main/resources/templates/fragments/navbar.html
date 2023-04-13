@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+<th:block th:fragment="navbar">
+    <nav class="navbar bg-light">
+        <div class="container-fluid d-flex justify-content-between">
+            <a class="navbar-brand" href="#">Photo Album</a>
+
+            <span class="d-flex">
+                <div class="btn-group me-2">
+                    <button aria-expanded="false" class="dropdown-toggle btn btn-light"
+                            data-bs-toggle="dropdown"
+                            type="button">
+                    <i class="fa-solid fa-user"></i>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="/logout">Logout</a></li>
+                    </ul>
+                </div>
+                <button aria-controls="offcanvasExample" class="btn btn-light" data-bs-target="#offcanvasExample"
+                        data-bs-toggle="offcanvas"
+                        type="button">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </span>
+        </div>
+    </nav>
+</th:block>
+</body>
+</html>
