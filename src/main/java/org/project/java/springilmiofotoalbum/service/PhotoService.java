@@ -31,12 +31,12 @@ public class PhotoService {
 
 
     public Photo editPhoto(Integer id, Photo formPhoto) throws PhotoNotFoundException {
-        Photo uodatePhoto = getById(id);
-        uodatePhoto.setTitle(formPhoto.getTitle());
-        uodatePhoto.setDescription(formPhoto.getDescription());
-        uodatePhoto.setUrl(formPhoto.getUrl());
-        uodatePhoto.setVisible(formPhoto.isVisible());
-        return photoRepository.save(uodatePhoto);
+        Photo updatePhoto = getById(id);
+        updatePhoto.setTitle(formPhoto.getTitle());
+        updatePhoto.setDescription(formPhoto.getDescription());
+        updatePhoto.setUrl(formPhoto.getUrl());
+        updatePhoto.setVisible(formPhoto.isVisible());
+        return photoRepository.save(updatePhoto);
     }
 
     public Photo getById(Integer id) throws PhotoNotFoundException {

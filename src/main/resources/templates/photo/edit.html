@@ -13,7 +13,7 @@
 <th:block th:replace="fragments/sidenav :: sidenav"></th:block>
 <h1 class="m-3">Photo edit</h1>
 <div class="container">
-    <form id="create-form" method="post" th:action="@{/photos/create}" th:object="${photo}">
+    <form id="create-form" method="post" th:action="@{|/photos/edit/*{id}|}" th:object="${photo}">
         <div class="mb-3">
             <label class="form-label" for="title">Title</label>
             <input aria-describedby="emailHelp" class="form-control" id="title" th:errorClass="is-invalid"
