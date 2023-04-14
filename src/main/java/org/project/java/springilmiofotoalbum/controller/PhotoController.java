@@ -4,6 +4,7 @@ import jakarta.validation.Valid;
 import org.project.java.springilmiofotoalbum.exceptions.PhotoNotFoundException;
 import org.project.java.springilmiofotoalbum.model.AlertMessages;
 import org.project.java.springilmiofotoalbum.model.Photo;
+import org.project.java.springilmiofotoalbum.service.CategoryService;
 import org.project.java.springilmiofotoalbum.service.PhotoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,6 +21,9 @@ public class PhotoController {
 
     @Autowired
     private PhotoService photoService;
+
+    @Autowired
+    private CategoryService categoryService;
 
     @GetMapping
     public String index(Model model) {
@@ -44,6 +48,7 @@ public class PhotoController {
     @GetMapping("/create")
     public String create(Model model) {
         model.addAttribute("photo", new Photo());
+        model.addAttribute("categories", categoryService.getAllCategories());
         return "/photo/create";
     }
 
@@ -66,6 +71,7 @@ public class PhotoController {
         try {
             Photo result = photoService.getById(id);
             model.addAttribute("photo", result);
+            model.addAttribute("categories", categoryService.getAllCategories());
             return "/photo/edit";
         } catch (PhotoNotFoundException e) {
             redirectAttributes.addFlashAttribute("alert", new AlertMessages(AlertMessages.typeAlert.ERROR, "Photo not found"));
