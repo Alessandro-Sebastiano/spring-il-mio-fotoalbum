@@ -30,6 +30,25 @@
         <div class="col-12 col-lg-8">
             <p th:text="${photo.description}"></p>
         </div>
+        <div class="col-12 col-lg-8">
+            <p class="fs-5">
+                <strong>Visible: </strong>
+                <span class="text-success" th:if="${photo.visible}">
+                   <i class="fa-regular fa-circle-check"></i>
+                </span>
+                <span class="text-danger" th:unless="${photo.visible}">
+                    <i class="fa-sharp fa-regular fa-circle-xmark"></i>
+                </span>
+            </p>
+        </div>
+        <div class="col-12 col-lg-8" th:if="${photo.categories.size > 0}">
+            <p class="fs-5">
+                <strong>Categories: </strong>
+                <span class="mx-2 text-primary" th:each="c : ${photo.categories}"
+                      th:text="${c.type}">
+                </span>
+            </p>
+        </div>
     </div>
     <div class="text-center">
         <a class="text-decoration-none" th:href="@{/photos/edit/{id}(id=${photo.id})}">
