@@ -11,6 +11,9 @@
 <body>
 <th:block th:replace="fragments/navbar :: navbar"></th:block>
 <th:block th:replace="fragments/sidenav :: sidenav"></th:block>
+<div th:if="${alert}">
+    <th:block th:replace="fragments/alert :: alert(${alert.typeAlertMessage}, ${alert.textMessage})"></th:block>
+</div>
 <div class="m-4">
     <a class="btn btn-primary rounded-circle" href="/photos">
         <i class="fa-sharp fa-solid fa-arrow-left"></i>

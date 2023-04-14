@@ -11,6 +11,9 @@
 <body>
 <th:block th:replace="fragments/navbar :: navbar"></th:block>
 <th:block th:replace="fragments/sidenav :: sidenav"></th:block>
+<div th:if="${alert}">
+    <th:block th:replace="fragments/alert :: alert(${alert.typeAlertMessage}, ${alert.textMessage})"></th:block>
+</div>
 <h1 class="m-3">All Photos</h1>
 <div class="container-lg">
     <div class="row g-3 my-3">
