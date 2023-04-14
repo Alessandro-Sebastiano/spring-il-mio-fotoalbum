@@ -3,6 +3,8 @@ package org.project.java.springilmiofotoalbum.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 
+import java.util.Set;
+
 @Entity
 @Table(name = "photos")
 public class Photo {
@@ -16,6 +18,9 @@ public class Photo {
     @NotBlank(message = "Url may not be empty")
     private String url;
     private boolean visible;
+
+    @ManyToMany
+    private Set<Category> categories;
 
     public Photo(Integer id, String title, String description, String url, boolean visible) {
         this.id = id;
@@ -67,5 +72,13 @@ public class Photo {
 
     public void setVisible(boolean visible) {
         this.visible = visible;
+    }
+
+    public Set<Category> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(Set<Category> categories) {
+        this.categories = categories;
     }
 }
