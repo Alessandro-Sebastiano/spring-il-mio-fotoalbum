@@ -14,34 +14,50 @@
 <h1 class="m-3">Photo create</h1>
 <div class="container">
     <form id="create-form" method="post" th:action="@{/photos/create}" th:object="${photo}">
-        <div class="mb-3">
-            <label class="form-label" for="title">Title</label>
-            <input aria-describedby="emailHelp" class="form-control" id="title" th:errorClass="is-invalid"
-                   th:field="*{title}" type="text">
-            <div class="invalid-feedback" th:if="${#fields.hasErrors('title')}">
-                <ul>
-                    <li th:each="err : ${#fields.errors('title')}" th:text="${err}"></li>
-                </ul>
+        <div class="row justify-content-center">
+            <div class="col-12 col-lg-6">
+                <div class="mb-3">
+                    <label class="form-label" for="title">Title</label>
+                    <input aria-describedby="emailHelp" class="form-control" id="title" th:errorClass="is-invalid"
+                           th:field="*{title}" type="text">
+                    <div class="invalid-feedback" th:if="${#fields.hasErrors('title')}">
+                        <ul>
+                            <li th:each="err : ${#fields.errors('title')}" th:text="${err}"></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="description">Description</label>
+                    <input class="form-control" id="description" th:field="*{description}" type="text">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="url">Image url</label>
+                    <input class="form-control" id="url" th:errorClass="is-invalid" th:field="*{url}" type="text">
+                    <div class="invalid-feedback" th:if="${#fields.hasErrors('url')}">
+                        <ul>
+                            <li th:each="err : ${#fields.errors('url')}" th:text="${err}"></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="mb-3 form-check">
+                    <input class="form-check-input" id="visible" th:field="*{visible}" type="checkbox">
+                    <label class="form-check-label" for="visible">Visible</label>
+                </div>
+            </div>
+            <div class="col-12 col-lg-4 d-flex justify-content-lg-center">
+                <span class="py-3">
+                    <h4>Categories:</h4>
+                    <div class="mb-3 form-check" th:each="c : ${categories}">
+                        <input class="form-check-input" th:field="*{categories}" th:id="${c.type}"
+                               th:value="${c.id}" type="checkbox">
+                        <label class="form-check-label" th:for="${c.type}" th:text="${c.type}"></label>
+                    </div>
+                </span>
             </div>
         </div>
-        <div class="mb-3">
-            <label class="form-label" for="description">Description</label>
-            <input class="form-control" id="description" th:field="*{description}" type="text">
+        <div class="text-center">
+            <button class="btn btn-primary" type="submit">Submit</button>
         </div>
-        <div class="mb-3">
-            <label class="form-label" for="url">Image url</label>
-            <input class="form-control" id="url" th:errorClass="is-invalid" th:field="*{url}" type="text">
-            <div class="invalid-feedback" th:if="${#fields.hasErrors('url')}">
-                <ul>
-                    <li th:each="err : ${#fields.errors('url')}" th:text="${err}"></li>
-                </ul>
-            </div>
-        </div>
-        <div class="mb-3 form-check">
-            <input class="form-check-input" id="visible" th:field="*{visible}" type="checkbox">
-            <label class="form-check-label" for="visible">Visible</label>
-        </div>
-        <button class="btn btn-primary" type="submit">Submit</button>
     </form>
 </div>
 </body>
