@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+          name="viewport">
+    <meta content="ie=edge" http-equiv="X-UA-Compatible">
+    <title>Photos</title>
+    <th:block th:replace="fragments/resources :: head"></th:block>
+</head>
+<body>
+<th:block th:replace="fragments/navbar :: navbar"></th:block>
+<th:block th:replace="fragments/sidenav :: sidenav"></th:block>
+<div th:if="${alert}">
+    <th:block th:replace="fragments/alert :: alert(${alert.typeAlertMessage}, ${alert.textMessage})"></th:block>
+</div>
+<h1 class="m-3">All Categories</h1>
+<div class="container-lg">
+    <div class="row justify-content-center">
+        <div class="col-12 col-lg-8">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">#Id</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Edit</th>
+                    <th scope="col">Delete</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="c : ${categories}">
+                    <th scope="row" th:text="${c.id}"></th>
+                    <td th:text="${c.type}"></td>
+                    <td>
+                        <a class="text-decoration-none text-white"
+                           th:href="@{|/categories/edit/${c.id}|}">
+                            <button class="btn btn-primary" type="submit">
+                                <i class="fa-solid fa-pen-to-square"></i>
+                            </button>
+                        </a>
+                    </td>
+                    <td>
+                        <form id="delete-form" method="get">
+                            <button class="btn btn-danger" type="submit">
+                                <i class="fa-sharp fa-solid fa-trash"></i>
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-12">
+            <h4 class="text-center mt-4">Add category</h4>
+            <form id="create-form" method="post" th:action="@{/categories/create}" th:object="${category}">
+                <div class="row justify-content-center">
+                    <div class="col-12 align-items-center">
+                        <div class="mb-3 d-flex align-items-end justify-content-center">
+                            <div class="me-2">
+                                <label class="form-label" for="type">Type</label>
+                                <input aria-describedby="emailHelp" class="form-control" id="type"
+                                       th:errorClass="is-invalid"
+                                       th:field="*{type}" type="text">
+                                <div class="invalid-feedback" th:if="${#fields.hasErrors('type')}">
+                                    <ul>
+                                        <li th:each="err : ${#fields.errors('type')}" th:text="${err}"></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <button class="btn btn-primary" type="submit">Submit</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+
+
+
