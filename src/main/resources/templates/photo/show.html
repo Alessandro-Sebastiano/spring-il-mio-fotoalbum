@@ -11,45 +11,50 @@
 <body>
 <th:block th:replace="fragments/navbar :: navbar"></th:block>
 <th:block th:replace="fragments/sidenav :: sidenav"></th:block>
-<h1 class="m-3" th:text="${photo.title}"></h1>
+<div class="m-4">
+    <a class="btn btn-primary rounded-circle" href="/photos">
+        <i class="fa-sharp fa-solid fa-arrow-left"></i>
+    </a>
+</div>
+<h1 class="m-3 text-center" th:text="${photo.title}"></h1>
 <div class="container">
     <div class="row justify-content-center mb-3">
-        <div class="col-6">
-            <img class="w-100 img-fluid" th:src="${photo.url}">
+        <div class="col-12 col-lg-8">
+            <img class="w-100 img-fluid" th:alt="${photo.title}" th:src="${photo.url}">
         </div>
     </div>
     <div class="row justify-content-center">
-        <div class="col-6">
-            <p th:text="${photo.description}"></pth:text>
+        <div class="col-12 col-lg-8">
+            <p th:text="${photo.description}"></p>
         </div>
     </div>
     <div class="text-center">
-        <a th:href="@{/photos/edit/{id}(id=${photo.id})}">
+        <a class="text-decoration-none" th:href="@{/photos/edit/{id}(id=${photo.id})}">
             <button class="btn btn-primary">
                 Edit
             </button>
         </a>
-        <button type="button" class="btn btn-danger ms-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
-           Delete
+        <button class="btn btn-danger ms-3" data-bs-target="#exampleModal" data-bs-toggle="modal" type="button">
+            Delete
         </button>
     </div>
 
 
     <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="exampleModal" tabindex="-1">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="exampleModalLabel">Danger</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button>
                 </div>
                 <div class="modal-body">
-                    Sure you want to delete <span th:text="${photo.title}"></spanth:text>?
+                    Sure you want to delete <span th:text="${photo.title}"></span>?
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                    <button class="btn btn-primary" data-bs-dismiss="modal" type="button">Close</button>
                     <a th:href="@{/photos/delete/{id}(id=${photo.id})}">
-                        <button type="button" class="btn btn-danger">Delete</button>
+                        <button class="btn btn-danger" type="button">Delete</button>
                     </a>
                 </div>
             </div>

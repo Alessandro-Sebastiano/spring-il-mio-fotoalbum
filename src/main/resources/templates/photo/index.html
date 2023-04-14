@@ -14,9 +14,9 @@
 <h1 class="m-3">All Photos</h1>
 <div class="container-lg">
     <div class="row g-3 my-3">
-        <div class="col-3" th:each="img : ${list}">
-            <a th:href="@{/photos/{id}(id=${img.id})}">
-                <img class="img-fluid" th:src="${img.url}">
+        <div class="col-12 col-sm-6 col-lg-3" th:each="img : ${list}">
+            <a th:href="@{/photos/{id}(id=${img.id})}" th:title="${img.title}">
+                <img class="img-fluid" th:alt="${img.title}" th:src="${img.url}">
             </a>
         </div>
     </div>
