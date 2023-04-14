@@ -26,6 +26,7 @@ public class PhotoService {
         storePhoto.setDescription(formPhoto.getDescription());
         storePhoto.setUrl(formPhoto.getUrl());
         storePhoto.setVisible(formPhoto.isVisible());
+        storePhoto.setCategories(formPhoto.getCategories());
         return photoRepository.save(storePhoto);
     }
 
@@ -36,6 +37,7 @@ public class PhotoService {
         updatePhoto.setDescription(formPhoto.getDescription());
         updatePhoto.setUrl(formPhoto.getUrl());
         updatePhoto.setVisible(formPhoto.isVisible());
+        updatePhoto.setCategories(formPhoto.getCategories());
         return photoRepository.save(updatePhoto);
     }
 
