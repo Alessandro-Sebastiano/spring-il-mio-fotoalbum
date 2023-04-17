@@ -58,6 +58,7 @@ public class PhotoController {
         boolean errors = bindingResult.hasErrors();
 
         if (errors) {
+            model.addAttribute("categories", categoryService.getAllCategories());
             return "/photo/create";
         }
 
@@ -80,10 +81,11 @@ public class PhotoController {
     }
 
     @PostMapping("/edit/{id}")
-    public String update(@PathVariable Integer id, @Valid @ModelAttribute("photo") Photo formPhoto, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+    public String update(@PathVariable Integer id, @Valid @ModelAttribute("photo") Photo formPhoto, BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes) {
         boolean errors = bindingResult.hasErrors();
 
         if (errors) {
+            model.addAttribute("categories", categoryService.getAllCategories());
             return "/photo/create";
         }
 
