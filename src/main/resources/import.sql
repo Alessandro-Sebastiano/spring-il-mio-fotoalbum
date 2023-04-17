@@ -8,3 +8,9 @@ INSERT INTO album_db.categories(`type`) VALUES('Sport');
 INSERT INTO album_db.categories(`type`) VALUES('Nature');
 INSERT INTO album_db.categories(`type`) VALUES('Art');
 INSERT INTO album_db.categories(`type`) VALUES('Architectural');
+
+INSERT INTO album_db.users(email, first_name, last_name, password) VALUES('admin@email.com', 'admin', 'admin', '{noop}adminpasswd');
+
+INSERT INTO album_db.roles(id, name) VALUES(1, 'ADMIN');
+
+INSERT INTO album_db.users_roles(user_id, roles_id) VALUES(1, 1);
