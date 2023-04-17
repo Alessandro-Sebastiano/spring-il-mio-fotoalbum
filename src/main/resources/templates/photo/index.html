@@ -14,7 +14,7 @@
 <div th:if="${alert}">
     <th:block th:replace="fragments/alert :: alert(${alert.typeAlertMessage}, ${alert.textMessage})"></th:block>
 </div>
-<h1 class="m-3">All Photos</h1>
+<h1 class="m-5">All Photos</h1>
 <div class="container-lg">
     <div class="row g-3 my-3">
         <div class="col-12 col-sm-6 col-lg-3" th:each="img : ${list}">
