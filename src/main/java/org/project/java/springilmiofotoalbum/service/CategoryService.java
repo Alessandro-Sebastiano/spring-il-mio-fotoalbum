@@ -4,6 +4,7 @@ import org.project.java.springilmiofotoalbum.exceptions.CategoryNotFoundExceptio
 import org.project.java.springilmiofotoalbum.model.Category;
 import org.project.java.springilmiofotoalbum.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,7 +17,7 @@ public class CategoryService {
     private CategoryRepository categoryRepository;
 
     public List<Category> getAllCategories() {
-        return categoryRepository.findAll();
+        return categoryRepository.findAll(Sort.by("id"));
     }
 
     public Category createCategory(Category formCategory) {
@@ -37,6 +38,20 @@ public class CategoryService {
             return result.get();
         } else {
             throw new CategoryNotFoundException(Integer.toString(id));
+        }
+    }
+
+    public boolean delete(Integer id) {
+        try {
+            getById(id);
+        } catch (CategoryNotFoundException e) {
+            throw new CategoryNotFoundException(Integer.toString(id));
+        }
+        try {
+            categoryRepository.deleteById(id);
+            return true;
+        } catch (Exception e) {
+            return false;
         }
     }
 }

@@ -34,7 +34,9 @@ public class CategoryController {
         boolean errors = bindingResult.hasErrors();
 
         if (errors) {
-            return "/categories";
+            List<Category> categories = categoryService.getAllCategories();
+            model.addAttribute("categories", categories);
+            return "/categories/index";
         }
 
         categoryService.createCategory(formCategory);
@@ -52,7 +54,33 @@ public class CategoryController {
         } catch (CategoryNotFoundException e) {
             redirectAttributes.addFlashAttribute("alert", new AlertMessages(AlertMessages.typeAlert.ERROR, "Category not found"));
         }
-        return "redirect:/categories/index";
+        return "redirect:/categories";
+    }
+
+    @PostMapping("/edit/{id}")
+    public String update(@PathVariable Integer id, @Valid @ModelAttribute("category") Category formCategory, BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes) {
+        boolean errors = bindingResult.hasErrors();
+
+        if (errors) {
+            List<Category> categories = categoryService.getAllCategories();
+            model.addAttribute("categories", categories);
+            return "/categories/index";
+        }
+
+        categoryService.editCategory(id, formCategory);
+        redirectAttributes.addFlashAttribute("alert", new AlertMessages(AlertMessages.typeAlert.SUCCESS, "Edited category"));
+        return "redirect:/categories";
+    }
+
+    @GetMapping("/delete/{id}")
+    public String delete(@PathVariable Integer id, RedirectAttributes redirectAttributes) {
+        try {
+            categoryService.delete(id);
+            redirectAttributes.addFlashAttribute("alert", new AlertMessages(AlertMessages.typeAlert.SUCCESS, "Deleted category"));
+        } catch (CategoryNotFoundException e) {
+            redirectAttributes.addFlashAttribute("alert", new AlertMessages(AlertMessages.typeAlert.ERROR, "Category not deleted, not found"));
+        }
+        return "redirect:/categories";
     }
 
 }
