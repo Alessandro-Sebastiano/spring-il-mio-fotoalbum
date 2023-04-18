@@ -3,7 +3,7 @@
         <div class="card p-0">
             <img :src="photo.url" class="card-img-top" alt="...">
             <div class="card-body">
-                <h5 class="card-title mb-3">{{ photo.title }}</h5>
+                <h5 class="card-title mb-3 text-capitalize">{{ photo.title }}</h5>
                 <router-link :to="{ name: 'show', params: { id: photo.id } }">
                     <button class="btn btn-primary">Show details</button>
                 </router-link>
