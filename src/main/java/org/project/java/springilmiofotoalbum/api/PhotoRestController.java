@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @CrossOrigin
@@ -18,8 +19,11 @@ public class PhotoRestController {
     private PhotoService photoService;
 
     @GetMapping
-    public List<Photo> index() {
+    public List<Photo> index(@RequestParam(name = "q") Optional<String> keyword) {
 
+        if (keyword.isPresent()) {
+            return photoService.getAllFiltered(keyword.get());
+        }
         return photoService.getAll();
 
     }

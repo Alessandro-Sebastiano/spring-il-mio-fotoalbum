@@ -20,6 +20,10 @@ public class PhotoService {
         return photoRepository.findAll(Sort.by("title"));
     }
 
+    public List<Photo> getAllFiltered(String keyword) {
+        return photoRepository.findByTitleContainingIgnoreCase(keyword);
+    }
+
     public Photo createPhoto(Photo formPhoto) {
         Photo storePhoto = new Photo();
         storePhoto.setTitle(formPhoto.getTitle());
