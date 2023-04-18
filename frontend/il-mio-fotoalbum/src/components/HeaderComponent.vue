@@ -17,7 +17,7 @@
                             </router-link>
                         </li>
                         <li class="nav-item">
-                            <router-link :to="{ name: 'home' }">
+                            <router-link :to="{ name: 'contact' }">
                                 <a class="nav-link" :class="this.$route.path == '/contact' ? 'active' : ''">Contact</a>
                             </router-link>
                         </li>

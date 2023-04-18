@@ -1,27 +1,31 @@
 <template>
     <HeaderComponent></HeaderComponent>
-    <div v-if="!loading" class="show-container p-5">
-        <h1 class="text-center mb-5 text-capitalize">{{ photo.title }} details</h1>
-        <div class="row justify-content-center">
-            <div class="col-lg-6">
-                <img class="img-fluid" :src="photo.url" :alt="photo.title">
+    <div v-if="error == ''">
+        <div v-if="!loading" class="show-container p-5">
+            <h1 class="text-center mb-5 text-capitalize">{{ photo.title }} details</h1>
+            <div class="row justify-content-center">
+                <div class="col-lg-6">
+                    <img class="img-fluid" :src="photo.url" :alt="photo.title">
+                </div>
+                <div class="col-lg-4 p-2 text-capitalize fs-5 fw-bold">
+                    <p>{{ photo.description }}</p>
+                </div>
             </div>
-            <div class="col-lg-4 p-2 text-capitalize fs-5 fw-bold">
-                <p>{{ photo.description }}</p>
+            <div class=" my-5 d-flex align-items-center justify-content-center" v-if="photo.categories.length != 0">
+                <h4 class="me-3">Categories:</h4>
+                <span class="text-primary fw-bold" v-for="(c, i) in photo.categories">{{ c.type }}<span
+                        v-if="i < photo.categories.length - 1">,&#160</span>
+                </span>
+            </div>
+            <div class="text-center my-5">
+                <router-link :to="{ name: 'home' }">
+                    <button class="btn btn-primary">Home</button>
+                </router-link>
             </div>
         </div>
-        <div class=" my-5 d-flex align-items-center justify-content-center" v-if="photo.categories.length != 0">
-            <h4 class="me-3">Categories:</h4>
-            <span class="text-primary fw-bold" v-for="(c, i) in photo.categories">{{ c.type }}<span
-                    v-if="i < photo.categories.length - 1">,&#160</span>
-            </span>
-        </div>
-        <div class="text-center my-5">
-            <router-link :to="{ name: 'home' }">
-                <button class="btn btn-primary">Home</button>
-            </router-link>
-        </div>
+        <div class="show-container" v-else="loading">Loading</div>
     </div>
+    <div class="show-container" v-else="error != ''">{{ error }}</div>
 </template>
 
 <script>
@@ -36,7 +40,8 @@ export default {
         return {
             store,
             photo: null,
-            loading: true
+            loading: true,
+            error: '',
         }
     },
 
@@ -53,6 +58,8 @@ export default {
                     if (response.data) {
                         this.photo = response.data;
                     }
+                }).catch(() => {
+                    this.error = "Not Found";
                 }).finally(() => {
                     this.loading = false
                 });
