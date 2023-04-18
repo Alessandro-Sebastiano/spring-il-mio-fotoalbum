@@ -23,9 +23,19 @@
                 </router-link>
             </div>
         </div>
-        <div class="show-container" v-else="loading">Loading</div>
+        <div class="show-container" v-else="loading">
+            <div class="wave">
+                <div class="ball"></div>
+                <div class="ball"></div>
+                <div class="ball"></div>
+                <div class="ball"></div>
+                <div class="ball"></div>
+            </div>
+        </div>
     </div>
-    <div class="show-container" v-else="error != ''">{{ error }}</div>
+    <div class="show-container" v-else="error != ''">
+        <h1 class="text-center p-5">{{ error }}</h1>
+    </div>
 </template>
 
 <script>
@@ -74,5 +84,54 @@ export default {
 .show-container {
     height: calc(100% - 56px);
     overflow-y: auto;
+
+    .wave {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #fff;
+    }
+
+    .ball {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        margin: 0 10px;
+        background-color: #6c5ce7;
+        animation: wave 1s ease-in-out infinite;
+    }
+
+    @keyframes wave {
+        0% {
+            transform: translateY(0);
+        }
+
+        50% {
+            transform: translateY(-15px);
+        }
+
+        100% {
+            transform: translateY(0);
+        }
+    }
+
+    .ball:nth-child(2) {
+        animation-delay: -0.2s;
+    }
+
+    .ball:nth-child(3) {
+        animation-delay: -0.4s;
+    }
+
+    .ball:nth-child(4) {
+        animation-delay: -0.6s;
+    }
+
+    .ball:nth-child(5) {
+        animation-delay: -0.8s;
+    }
+
+
 }
 </style>
