@@ -11,6 +11,20 @@
 <body>
 <th:block th:replace="fragments/navbar :: navbar"></th:block>
 <th:block th:replace="fragments/sidenav :: sidenav"></th:block>
-<h1 class="my-3">Home Page</h1>
+<div class="text-center">
+    <h1 class="my-3 py-5">Home Page</h1>
+</div>
+<div class="row justify-content-center p-3">
+    <div class="col-4">
+        <a href="/photos">
+            <button class="btn btn-primary d-block w-100" type="button">All photos</button>
+        </a>
+    </div>
+    <div class="col-4">
+        <a href="/photos/create">
+            <button class="btn btn-primary d-block w-100" type="button">Add new photo</button>
+        </a>
+    </div>
+</div>
 </body>
 </html>
