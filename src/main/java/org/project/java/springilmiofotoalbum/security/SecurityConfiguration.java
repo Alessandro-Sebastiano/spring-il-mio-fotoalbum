@@ -34,10 +34,12 @@ public class SecurityConfiguration {
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests()
                 .requestMatchers("/api/photos/**").permitAll()
+                .requestMatchers("/api/contact/**").permitAll()
                 .requestMatchers("/**").hasAnyAuthority("ADMIN")
                 .and().formLogin()
                 .and().logout()
                 .and().exceptionHandling();
+        http.csrf().disable();
         return http.build();
     }
 
